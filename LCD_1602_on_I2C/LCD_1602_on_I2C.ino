@@ -12,11 +12,11 @@ void setup()
   lcd.setBacklight((uint8_t)1);
 
   // row 1
-  lcd.print("Hello, world!");
+  lcd.print("hays monday... ");
 
   // row 2
   lcd.setCursor(0, 1);
-  lcd.print("iyotan sa kanto");
+  lcd.print("iyUtan sa kanto");
 }
 
 void loop()
