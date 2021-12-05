@@ -8,6 +8,7 @@ const int button2Pin = 11;
 const int servoPin = 12;
 int button1State = 0;
 int button2State = 0;
+const int buzzerPin = 13;
 
 const byte ROWS = 4;
 const byte COLS = 4; 
@@ -30,6 +31,9 @@ char input;
 void verify(char input){
   if(input == password){
     Serial.println("Password is correct");
+    digitalWrite(buzzerPin, HIGH);
+    delay(500); 
+    digitalWrite(buzzerPin, LOW);
     TP.write(180);
     delay(5000);
     TP.write(0);
@@ -44,6 +48,7 @@ void setup(){
   TP.attach(servoPin);
   pinMode(servoPin, OUTPUT);
   pinMode(button1Pin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
 }
  
 void loop(){
