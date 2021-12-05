@@ -24,12 +24,16 @@ byte colPins[COLS] = {6, 7, 8, 9};
 
 Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
  
-const char password= "1234";
+const char password= '1234';
 char input;
 
-char verify(char input){
+void verify(char input){
   if(input == password){
+    Serial.println("Password is correct");
     TP.write(180);
+    delay(5000);
+    TP.write(0);
+    Serial.println("Locking");
   }else{
     TP.write(0);          
   }
@@ -43,15 +47,16 @@ void setup(){
 }
  
 void loop(){
-  button1State = digitalRead(button1Pin);
-  if(button1State == HIGH){
-    Serial.println("Enter Password:");
+    button1State = digitalRead(button1Pin);
     char customKey = customKeypad.getKey();
-    Serial.println(customKey);
-    if(button2State == HIGH){
-      verify(customKey);
+
+    if(customKey){
+      input = customKey;
+      Serial.print(customKey);
+      Serial.println("");
+      verify(input);
+    }else{
+      TP.write(0);
     }
-  }else{
-    TP.write(0);
-  }
+    
 }
