@@ -4,7 +4,7 @@
 Servo TP;
 
 const int button1Pin = 10;
-const int button2Pin = 11;
+const int LEDPin = 11;
 const int servoPin = 12;
 int button1State = 0;
 int button2State = 0;
@@ -32,8 +32,10 @@ void verify(char input){
   if(input == password){
     Serial.println("Password is correct");
     digitalWrite(buzzerPin, HIGH);
+    digitalWrite(LEDPin, HIGH);
     delay(500); 
     digitalWrite(buzzerPin, LOW);
+    digitalWrite(LEDPin, LOW);
     TP.write(180);
     delay(5000);
     TP.write(0);
@@ -49,6 +51,7 @@ void setup(){
   pinMode(servoPin, OUTPUT);
   pinMode(button1Pin, INPUT);
   pinMode(buzzerPin, OUTPUT);
+  pinMode(LEDPin, OUTPUT);
 }
  
 void loop(){
